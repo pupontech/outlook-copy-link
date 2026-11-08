@@ -10,28 +10,40 @@
     body { font-family: "Segoe UI", system-ui, sans-serif; font-size: 14px; margin: 0; padding: 14px; color: #201f1e; background: #fff; }
     h1 { font-size: 15px; margin: 0 0 4px; }
     .subject { color: #605e5c; margin: 0 0 12px; word-break: break-word; }
-    textarea { width: 100%; box-sizing: border-box; height: 84px; font-family: Consolas, monospace; font-size: 11px; padding: 6px; border: 1px solid #8a8886; border-radius: 2px; resize: vertical; }
+    label { display: block; font-size: 12px; color: #605e5c; margin: 10px 0 3px; }
+    textarea { width: 100%; box-sizing: border-box; height: 70px; font-family: Consolas, monospace; font-size: 11px; padding: 6px; border: 1px solid #8a8886; border-radius: 2px; resize: vertical; }
     .row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
     button { font: inherit; padding: 6px 12px; border: 1px solid #0f6cbd; background: #0f6cbd; color: #fff; border-radius: 2px; cursor: pointer; }
     button.secondary { background: #fff; color: #0f6cbd; }
     button:disabled { opacity: .5; cursor: default; }
     #status { margin-top: 10px; min-height: 18px; color: #107c10; }
     #status.err { color: #a4262c; }
+    details { margin-top: 14px; }
+    summary { cursor: pointer; color: #0f6cbd; }
     .note { margin-top: 14px; font-size: 12px; color: #605e5c; }
   </style>
 </head>
 <body>
   <h1>Link to this email</h1>
   <p class="subject" id="subject">Select an email…</p>
-  <textarea id="link" readonly placeholder="Link appears here"></textarea>
+
+  <label for="link">Opens in Outlook desktop</label>
+  <textarea id="link" readonly placeholder="Working…"></textarea>
   <div class="row">
     <button id="copy">Copy link</button>
     <button id="copyRich" class="secondary">Copy as hyperlink</button>
   </div>
-  <div id="status" role="status"></div>
-  <p class="note">Tip: pin this panel (pin icon, top right) and it will update automatically as you click through emails.</p>
 
-  <script type="text/javascript" src="link.js?v=2"></script>
-  <script type="text/javascript" src="taskpane.js?v=2"></script>
+  <details>
+    <summary>Web link (Outlook on the web)</summary>
+    <textarea id="webLink" readonly></textarea>
+    <div class="row"><button id="copyWeb" class="secondary">Copy web link</button></div>
+  </details>
+
+  <div id="status" role="status"></div>
+  <p class="note">Tip: pin this panel (pin icon, top right) and it will update automatically as you click through emails. Desktop links only open on a PC with classic Outlook for the same mailbox.</p>
+
+  <script type="text/javascript" src="link.js?v=3"></script>
+  <script type="text/javascript" src="taskpane.js?v=3"></script>
 </body>
 </html>

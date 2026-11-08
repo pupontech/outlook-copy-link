@@ -7,11 +7,11 @@
   xsi:type="MailApp">
 
   <Id>a8d04d9e-073e-4cc8-bca7-6fbe42c6a280</Id>
-  <Version>1.1.0.0</Version>
+  <Version>1.2.0.0</Version>
   <ProviderName>Rubin IT Consulting</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Copy Email Link"/>
-  <Description DefaultValue="One click copies a direct web link to the selected email, so you can paste it into tickets, Trello cards, notes or chats."/>
+  <Description DefaultValue="Copy a link to the selected email that opens it in Outlook desktop (or on the web), so you can paste it into tickets, Trello cards, notes or chats."/>
   <IconUrl DefaultValue="https://pupontech.github.io/outlook-copy-link/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://pupontech.github.io/outlook-copy-link/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://pupontech.github.io/outlook-copy-link/taskpane.html"/>
@@ -39,7 +39,7 @@
     </Form>
   </FormSettings>
 
-  <Permissions>ReadItem</Permissions>
+  <Permissions>ReadWriteMailbox</Permissions>
 
   <Rule xsi:type="RuleCollection" Mode="Or">
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
@@ -101,7 +101,7 @@
           <bt:String id="PaneButton.Label" DefaultValue="Link Panel"/>
         </bt:ShortStrings>
         <bt:LongStrings>
-          <bt:String id="PaneButton.Tip" DefaultValue="Show the link to this email in a side panel, with options to copy it as plain text or as a clickable hyperlink."/>
+          <bt:String id="PaneButton.Tip" DefaultValue="Show a link to this email that opens in Outlook desktop, with options to copy it as plain text or as a clickable hyperlink."/>
         </bt:LongStrings>
       </Resources>
     </VersionOverrides>
