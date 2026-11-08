@@ -1,0 +1,42 @@
+/* Side panel: shows the link for the selected email; updates when the selection changes (if pinned). */
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+
+  function setStatus(msg, isErr) {
+    var s = $("status");
+    s.textContent = msg || "";
+    s.className = isErr ? "err" : "";
+  }
+
+  function render() {
+    var item = Office.context.mailbox.item;
+    var link = CopyLink.currentLink();
+    $("subject").textContent = item && item.subject ? item.subject : (item ? "(no subject)" : "Select an email…");
+    $("link").value = link;
+    $("copy").disabled = $("copyRich").disabled = !link;
+    setStatus("");
+  }
+
+  function doCopy(rich) {
+    var link = $("link").value;
+    if (!link) return;
+    var item = Office.context.mailbox.item;
+    var label = (item && item.subject) ? item.subject : link;
+    var p = rich ? CopyLink.copyHyperlink(link, label) : CopyLink.copyText(link);
+    p.then(function () { setStatus(rich ? "Hyperlink copied." : "Link copied."); })
+     .catch(function () {
+        $("link").focus(); $("link").select();
+        setStatus("Automatic copy was blocked. The link is selected: press Ctrl+C.", true);
+     });
+  }
+
+  Office.onReady(function () {
+    $("copy").addEventListener("click", function () { doCopy(false); });
+    $("copyRich").addEventListener("click", function () { doCopy(true); });
+    render();
+    try {
+      Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, render);
+    } catch (e) { /* older clients: panel simply won't auto-refresh */ }
+  });
+})();
