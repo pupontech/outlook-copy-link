@@ -31,10 +31,26 @@
      });
   }
 
+  // Try to copy as soon as the panel opens (used by the one-click "Copy Link" button).
+  // Some Outlook builds only allow copying from a click inside the panel; if that happens
+  // the link is pre-selected so a single Ctrl+C finishes the job.
+  function autoCopy() {
+    var link = $("link").value;
+    if (!link) return;
+    window.focus();
+    CopyLink.copyText(link).then(function () {
+      setStatus("Link copied to clipboard.");
+    }).catch(function () {
+      $("link").focus(); $("link").select();
+      setStatus("Auto-copy was blocked. Press Ctrl+C (link is selected) or click Copy link.", true);
+    });
+  }
+
   Office.onReady(function () {
     $("copy").addEventListener("click", function () { doCopy(false); });
     $("copyRich").addEventListener("click", function () { doCopy(true); });
     render();
+    autoCopy(); // TEST BUILD: always on; will be limited to ?copy=1 after testing
     try {
       Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, render);
     } catch (e) { /* older clients: panel simply won't auto-refresh */ }
