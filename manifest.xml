@@ -7,7 +7,7 @@
   xsi:type="MailApp">
 
   <Id>a8d04d9e-073e-4cc8-bca7-6fbe42c6a280</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.1.0.0</Version>
   <ProviderName>Rubin IT Consulting</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Copy Email Link"/>
@@ -58,31 +58,12 @@
       <Hosts>
         <Host xsi:type="MailHost">
           <DesktopFormFactor>
-            <FunctionFile resid="Commands.Url"/>
-
             <ExtensionPoint xsi:type="MessageReadCommandSurface">
               <OfficeTab id="TabDefault">
                 <Group id="CopyLinkGroup">
                   <Label resid="Group.Label"/>
 
-                  <!-- One-click button: copies the link straight to the clipboard -->
-                  <Control xsi:type="Button" id="CopyLinkButton">
-                    <Label resid="CopyButton.Label"/>
-                    <Supertip>
-                      <Title resid="CopyButton.Label"/>
-                      <Description resid="CopyButton.Tip"/>
-                    </Supertip>
-                    <Icon>
-                      <bt:Image size="16" resid="Icon.16x16"/>
-                      <bt:Image size="32" resid="Icon.32x32"/>
-                      <bt:Image size="80" resid="Icon.80x80"/>
-                    </Icon>
-                    <Action xsi:type="ExecuteFunction">
-                      <FunctionName>copyLink</FunctionName>
-                    </Action>
-                  </Control>
-
-                  <!-- Backup / extras: side panel that shows the link, with copy buttons -->
+                  <!-- Side panel that shows the link, with copy buttons -->
                   <Control xsi:type="Button" id="LinkPaneButton">
                     <Label resid="PaneButton.Label"/>
                     <Supertip>
@@ -113,16 +94,13 @@
           <bt:Image id="Icon.80x80" DefaultValue="https://pupontech.github.io/outlook-copy-link/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="Commands.Url" DefaultValue="https://pupontech.github.io/outlook-copy-link/commands.html"/>
           <bt:Url id="Taskpane.Url" DefaultValue="https://pupontech.github.io/outlook-copy-link/taskpane.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="Group.Label" DefaultValue="Email Link"/>
-          <bt:String id="CopyButton.Label" DefaultValue="Copy Link"/>
           <bt:String id="PaneButton.Label" DefaultValue="Link Panel"/>
         </bt:ShortStrings>
         <bt:LongStrings>
-          <bt:String id="CopyButton.Tip" DefaultValue="Copy a direct web link to this email to the clipboard."/>
           <bt:String id="PaneButton.Tip" DefaultValue="Show the link to this email in a side panel, with options to copy it as plain text or as a clickable hyperlink."/>
         </bt:LongStrings>
       </Resources>
